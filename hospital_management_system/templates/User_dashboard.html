@@ -1,0 +1,397 @@
+{% load static %}
+{% static "Images" as baseUrl %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+        integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'CSS/After_login_Styles.css' %}" />
+    <title>User Page</title>
+    <style>
+
+        #profilecontent{
+            display:none;
+        }
+
+        #profilecontent .row .col-5{
+            width:100%;
+            height:100%;
+            word-wrap: break-word;
+        }
+        #opcontent{
+            width:100%;
+            flex-direction: column;
+            display: none;
+        }
+        #opcontent form{
+            border:1px solid gray;
+            padding:10px;
+            border-radius:10px;
+            width:50%;
+            height:100%;
+            margin:0;
+        }
+        #opcontent form .form-group{
+            width:100%;
+            display:flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        #opcontent form .form-group input[type="text"],
+        #opcontent form .form-group input[type="email"]{
+            width:100%;
+            border:none;
+            border-bottom:1px solid gray;
+            padding:5px;
+            height:100%;
+            outline:none;
+            color:black;
+            font-size: 1.2em;
+        }
+        #opcontent form .form-group input[type="date"]{
+            width:40%;
+            border:none;
+            border-bottom:1px solid gray;
+            padding:5px;
+            height:100%;
+            outline:none;
+            color:black;
+            font-size: 1.2em;
+        }
+        #opcontent form .form-group.submitbtn{
+            justify-content: flex-end;
+            margin-bottom: 10px;
+        }
+
+        #billcontent{
+            display:flex;
+            flex-direction: column;
+            display: none;
+        }
+
+        #medicinecontent{
+            display:flex;
+            flex-direction:column;
+            display: none;
+        }
+
+        table{
+            text-align: center;
+        }
+
+        #billcontent table th{
+            text-transform: uppercase;
+        }
+
+        #billcontent table td a{
+            color:blue;
+            text-decoration:underline;
+        }
+
+        #billcontent .warningnote{
+            display: block;
+            color:coral;
+            font-size: 1.1em;
+        }
+
+        .success{
+            color:green;
+            font-weight: bold;
+            font-size : 1.2em;
+        }
+
+        .error{
+            color:red;
+            font-weight:bold;
+            font-size:1.2em;
+        }
+        .generalmessage{
+            font-weight: bold;
+            font-size:1.2em;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .generalmessage .special{
+            color:coral;
+        }
+        @media only screen and (max-width:1192px){
+            #opcontent form{
+                width:100%;
+                margin:0;
+            }
+            #opcontent form .form-group{
+                flex-direction: column;
+            }
+            #opcontent form .form-group input[type="date"]{
+                width:100%;
+                margin-bottom: 20px;
+            }
+            #billcontent .warningnote{
+                width:100%;
+                border:1px solid red;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    {% for msg in messages %}
+						{%if msg is not null%}
+							<div class="alert {{msg.tags}} alert-dismissible fade show" id="alertmessages">
+								<button type="button" class="close" data-dismiss="alert">&times;</button>
+									<h6>{{msg}}</h6>
+							</div>
+						{% endif %}
+					{% endfor %}
+    <nav class="navbar navbar-expand-sm navbar-light" id="topnav">
+        <!-- Brand/logo -->
+        <a class="navbar-brand" href="#">
+            <img src="{% static 'Images/logo3.jpg' %}" />
+        </a>
+        <a class="navbar-brand" href="#">
+            <h1 class="header_text">Hospital Name</h1>
+        </a>
+        <!-- Links -->
+        <ul class="nav justify-content-end navbar-nav navbar-collapse">
+            <li class="nav-item" id="usrnm">
+                <i class="fas fa-user-graduate"></i>
+                <span id="topname">{{user.first_name}}</span><br>
+                <span id="topmail">{{user}}</span>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    <i class="far fa-user-circle"></i>
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#" id="dropusrnm">
+                        <i class="far fa-id-card"></i>
+                        <span>{{user.first_name}}</span><br>
+                        <span id="usrmail">{{user}}</span>
+                    </a>
+                    <hr id="firsthr">
+                    <a class="dropdown-item" href="changepasswordafterlogin">
+                        <i class="fas fa-lock"></i>
+                        <span>Change Password</span>
+                    </a>
+                    <hr>
+                    <a class="dropdown-item" href="deleteaccount">
+                        <i class="fas fa-user-slash"></i>
+                        <span>Delete Account</span>
+                    </a>
+                    <hr>
+                    <a class="dropdown-item" href="logout">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Log Out</span>
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+    <button type="button" id="sidenavCollapse" class="btn btn-info">
+        <i class="fas fa-align-left"></i>
+    </button>
+    <div class="container-fluid">
+        <nav id="sidenav">
+            <div class="sidenav-header">
+                <h3>{{user.first_name}}</h3>
+            </div>
+            <ul class="sidenav-components">
+                <li class="active">
+                    <a href="#"
+                        onclick="display_content('homecontent','profilecontent','opcontent','billcontent','medicinecontent')">
+                        <i class="fas fa-home"></i>
+                        <span>HOME</span>
+                    </a>
+                    <a href="#"
+                        onclick="display_content('profilecontent','homecontent','opcontent','billcontent','medicinecontent')">
+                        <i class="far fa-id-card"></i>
+                        <span>Profile</span>
+                    </a>
+                    <a href="#"
+                        onclick="display_content('opcontent','homecontent','profilecontent','billcontent','medicinecontent')">
+                        <i class="far fa-id-card"></i>
+                        <span>OP</span>
+                    </a>
+                    <a href="#"
+                        onclick="display_content('billcontent','homecontent','profilecontent','opcontent','medicinecontent')">
+                        <i class="far fa-id-card"></i>
+                        <span>Your bills</span>
+                    </a>
+                    <a href="#"
+                        onclick="display_content('medicinecontent','homecontent','profilecontent','opcontent','billcontent')">
+                        <i class="far fa-id-card"></i>
+                        <span>Medicines</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div id="content">
+            <div id="homecontent" class="container">
+                <h2>Welcome <span>{{user.first_name}}</span></h2>
+                <p>First of all thank you so much for connecting with us</p>
+                <p>We guarantee that we do the best for you </p>
+                <p>You can go around the page and will find all your data here itself</p>
+                <p>Click on the icon above to open action center</p>
+            </div>
+            <div id="profilecontent" class="container">
+                <div class="row" id="userimage">
+                    <i class="far fa-user-circle"></i>
+                </div>
+                <div class="row">
+                    <div class="col-5">
+                        Name
+                    </div>
+                    <div class="col-2">
+                        :
+                    </div>
+                    <div class="col-5">
+                        {{user.first_name}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-5">
+                        Email
+                    </div>
+                    <div class="col-2">
+                        :
+                    </div>
+                    <div class="col-5">
+                        {{user.username}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-5">
+                        Mobile Number
+                    </div>
+                    <div class="col-2">
+                        :
+                    </div>
+                    <div class="col-5">
+                        {{user.Contact_number}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-5">
+                        Age
+                    </div>
+                    <div class="col-2">
+                        :
+                    </div>
+                    <div class="col-5">
+                        {{user.Age}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-5">
+                        Gender
+                    </div>
+                    <div class="col-2">
+                        :
+                    </div>
+                    <div class="col-5">
+                        {% if user.Gender == "M" %}
+                            Male
+                        {% elif user.Gender == "F" %}
+                            Female
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div id="opcontent" class="container">
+
+                {% if opissued == True %}
+                    <p class="generalmessage">Your card has already issued.It will expire on <span class="special">{{opcontent}}</span> at <span class="special">7.00P.M</span></p>
+                    {% if appointment == 0 %}
+                        <form action="/Services/book_appointment" method="POST">
+                            {% csrf_token %}
+                            <label class="label" style="font-weight:bold">Enter your problem</label><br>
+                            <input type="text" name="disease" style="width:100%" class="form-control" placeholder = "Enter your disease" required value="{{disease_name}}"><br><br>
+                            <button type="submit" class="btn btn-outline-primary">Book Appointment</button>
+                        </form>
+                    {% else %}
+                        <p class="generalmessage">You have already booked your appointment please visit the hospital for further process</p>
+                    {% endif %}
+                {% else %}
+                    <form action="/Services/createop" method = "POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <input type="text" placeholder="Enter your name" name="patientname" required value="{{user.first_name}}">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Enter your Email" name="patientmail" required value="{{user.username}}">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="Enter your problem" name="disease">
+                        </div>
+                        <div class="form-group submitbtn">
+                            <input type="submit" value="CREATE OP CARD" class="btn btn-outline-success">
+                        </div>
+                    </form>
+                {% endif %}
+            </div>
+            <div id="billcontent" class="container">
+                <table class="table  table-bordered table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Username</th>
+                            <th>Full Name</th>
+                            <th>Issue Date</th>
+                            <th>Amount</th>
+                            <th>Bill Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for bill in bills %}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td>{{user.username}}</td>
+                                <td>{{user.first_name}} {{user.last_name}}</td>
+                                <td>{{bill.date_generated}}</td>
+                                <td>{{bill.total_amount}}</td>
+                                {% if bill.bill_status == 1 %}
+                                    <td class="success">PAID</td>
+                                {% elif bill.bill_status == 0 %}
+                                    <td class="error">PENDING</td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <!--<p class="warningnote">*Please note that your bills will be deleted for every 60 days and please make sure that you download that within time
+                     for your future calculations</p>-->
+            </div>
+            <div id="medicinecontent" class="container">
+                <table class="table table-bordered table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Date Issued</th>
+                            <th>Medicines and their quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for medicine in medicines %}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td>{{medicine.date_assigned}}</td>
+                                <td>{{medicine.medicine_list}}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static 'JS/After_login_Scripts.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,152 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="{% static 'CSS/register_style.css' %}" />
+    <title>Registration</title>
+</head>
+
+<body>
+    {% for msg in messages %}
+    {%if msg is not null%}
+    <div class="alert {{msg.tags}} alert-dismissible center-block fade show" id="alertmessages">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <h6>{{msg}}</h6>
+    </div>
+    {% endif %}
+    {% endfor %}
+    <div class="container">
+        <div class="mainrow">
+            <div class="leftdiv">
+                <div class="text">
+                    <h3>Sign Up</h3>
+                    <p>Registering as a patient.To register as a Hospital and Medical please contact Admin</p>
+                </div>
+                <div class="loginhere">
+                    <p>Have an account ??</p>
+                    <a href="login" class="btn btn-outline-primary">LOGIN</a>
+                </div>
+            </div>
+            <div class="rightdiv">
+                <div class="logo">
+                    <img src="{% static 'Images/logo3.jpg' %}" class="rounded" alt="logo" width="60px"
+                        height="60px" />
+                    <span class="title">Hospital Name</span>
+                </div>
+                <div class="registrationdiv">
+                    <form action="register" method="POST">
+                        {% csrf_token %}
+                        <div class="contentblock active" id="verificationblock">
+                            <div class="nonanimated">
+                                <div class="innerdiv inputsinrow">
+                                        <span class="label">Full Name</span>
+                                        <input type="text" placeholder="Enter Firtname" name="first_name" required />
+                                        <span class="errormessages" id="firstname_error"></span>
+                                </div>
+                                <div class="innerdiv emailverification">
+                                    <span class="label">Email/username</span>
+                                    <input type="email" placeholder="Enter your mail" name="user_email" id="mailid"
+                                        required />
+                                    <input type="hidden"  name="E-mail" id="usermail">
+                                </div>
+                            </div>
+                            <div class="innerdiv animated">
+                                <div class="innerdiv boxactive" id="verifyotp">
+                                    <div class="innerdiv"">
+                                        <button type=" button" class="btn btn-outline-primary emailbtn"
+                                        id="emailverificationbutton">
+                                        VERIFY EMAIL
+                                        <!--<i class="fas fa-spinner btnloader"></i>-->
+                                        </button>
+                                        <span class="errormessages" id="register_mail_errormessage"></span>
+                                    </div>
+                                    <span class="label" id="otplabel">otp</span>
+                                    <div class="inputsinrow" id="otpdiv">
+                                        <input type="number" placeholder="Enter OTP" name="mailverifyingotp"
+                                            id="otpinput" />
+                                        <button type="button" class="btn btn-success" id="otpbtn">
+                                            Verify OTP
+                                        </button>
+                                        <span class="errormessages" id="otp_errormessage"></span>
+                                    </div>
+                                </div>
+                                <div class="innerdiv boxinactive" id="genderdiv">
+                                    <span class="label">Gender</span>
+                                    <div class="inputsinrow">
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                            <input type="radio" class="custom-control-input" id="male" name="Gender"
+                                                value="M" required />
+                                            <label class="custom-control-label" for="male">MALE</label>
+                                        </div>
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                            <input type="radio" class="custom-control-input" id="female" name="Gender"
+                                                value="F" required />
+                                            <label class="custom-control-label" for="female">FEMALE</label>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="radio_input" id="usergender">
+                                    <span class="errormessages" id="gender_errormessage"></span>
+                                    <div class="clearfix">
+                                        <button type="button" class="btn btn-outline-primary" id="nextblockbtn">
+                                            One more click
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="contentblock inactive" id="registrationblock">
+                            <div class="innerdiv">
+                                <span class="label">Mobile number</span>
+                                <input type="text" placeholder="Enter your number" pattern="(?=.*\d).{10}"
+                                    title="Mobile Number must be of 10 digits" name="phn_number" required />
+                                <span class="errormessages" id="number_errormessage"></span>
+                            </div>
+                            <div class="innerdiv">
+                                <span class="label">Age</span>
+                                <input type="text" placeholder="Enter your age"
+                                    title="Age must not be empty" name="age" required />
+                                <span class="errormessages" id="age_errormessage"></span>
+                            </div>
+                            <div class="innerdiv">
+                                <span class="label">Password</span>
+                                <input type="password" id="psswd" placeholder="Enter your Password"
+                                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z\d]).{8,}"
+                                    name="passwd"
+                                    title="Password Must Contain atleast one symbol,one numeric digit,one Uppercase letter , one Lower case letter and must contain atleast 8 characters"
+                                    required />
+                                <i class="fas fa-eye" onclick="reveal('psswd',this,'cnfrmpsswd')"></i>
+                            </div>
+                            <div class="innerdiv">
+                                <span class="label">Confirm Password</span>
+                                <input type="password" id="cnfrmpsswd" placeholder="confirm your Password" required
+                                    name="confirmpassword"
+                                    oninput='cnfrmpsswd.setCustomValidity(cnfrmpsswd.value != psswd.value ? "Passwords do not match." : "")' />
+                                <span class="errormessages" id="password_errormessage"></span>
+                            </div>
+                            <div class="clearfix">
+                                <button type="submit" class="btn btn-outline-secondary">CONNECT WITH US</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="row bottomcircles">
+                    <span class="active"></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://kit.fontawesome.com/af3bc8c33b.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="{% static 'JS/register_scripts.js' %}"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>

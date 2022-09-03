@@ -1,0 +1,229 @@
+body{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    min-height: 100vh;
+    /*background-color: #99ff99;*/
+    background-color: #bdc0c2;
+}
+
+.container{
+    position: relative;
+    width: 500px;
+    height: 500px;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    animation: slidefromright 1.5s forwards ease-in-out;
+    z-index: 1;
+}
+
+@keyframes slidefromright{
+    from{
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to{
+        transform: translateX(0%);
+        opacity: 1;
+    }
+}
+
+.container form{
+    width: 70%;
+    margin: 0;
+    height: 80%;
+    margin-top: 50px;
+    overflow: hidden;
+}
+
+.container form h2{
+    text-align: center;
+    color: #999;
+    margin-bottom: 100px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 400;
+    position: relative;
+    width: 100%;
+    animation: slidefromtop 2s forwards ease-in-out;
+}
+
+@keyframes slidefromtop{
+    from{
+        transform: translateY(-200%);
+        opacity: 0;
+    }
+    to{
+        transform: translateY(0%);
+        opacity: 1;
+    }
+}
+
+.container form .form-group{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.container form .form-group input{
+    width: 100%;
+    border: none;
+    outline: none;
+    margin: 8px 0;
+    font-size: 1.2em;
+    letter-spacing: 1px ;
+    font-weight: 400;
+    color: #999;
+    padding: 10px;
+    padding-left: 0;
+    transition: all 0.5s;
+    word-wrap: break-word;
+    text-overflow: inherit;
+}
+
+.container form .form-group input:-webkit-autofill{
+    -webkit-background-color: #fff;
+    background-color: #fff;
+    -webkit-text-fill-color: #777;
+    transition: background-color 5000s ease-in-out;
+}
+
+.container form .form-group label{
+    width: 100%;
+    position: absolute;
+    left:0px;
+    font-size:1.2em;
+    bottom: 5px;
+    transition:all  0.5s;
+    color: #999999;
+    height: 100%;
+    pointer-events: none;
+    border-bottom: 2px solid #999999;
+    animation: slidefromright 1.5s forwards ease-in-out;
+}
+
+.container form .form-group label span{
+    position: absolute;
+    bottom: 6px;
+    font-size: 1.2em;
+    left: 0;
+    transition: all 0.6s ease;
+    font-weight: 500;
+}
+
+.container form .form-group label::after{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-bottom: 3px solid #008000;
+    left: 0;
+    bottom: -2px;
+    transform: translateX(-200%);
+    transition: all 0.6s ease-in-out;
+}
+
+.container form .form-group input:focus ~ label span,
+.container form .form-group input:valid ~ label span{
+    transform: translateY(-25px);
+    font-size: 1em;
+    color: #008000;
+}
+
+.container form .form-group input:focus~label::after,
+.container form .form-group input:valid~label::after{
+    transform: translateX(0%);
+}
+
+.container form .form-group input::-webkit-outer-spin-button,
+.container form .form-group input::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.container form .form-group .disabledinput{
+    border: none;
+    padding: 5px;
+    text-align: center;
+    background: none;
+    color: #008000;
+    font-size: 14px;
+    background-color: white;
+    animation: slidefromleft 1.8s forwards ease-in-out;
+}
+
+@keyframes slidefromleft{
+    from{
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to{
+        transform: translateX(0%);
+        opacity: 1;
+    }
+}
+
+.container form .form-group .disabledlabel{
+    border-bottom: 2px solid #008000;
+    bottom: -5px;
+    animation: slidefromleft 1.8s forwards ease-in-out;
+}
+
+.container form .form-group .disabledspan{
+    transform: translateY(-30px);
+    color: #008000;
+    font-weight: 500;
+}
+
+.container form p{
+    color: #ff8080;
+    font-size: 1.2em;
+    text-align: center;
+}
+
+.container form .form-group button{
+    animation: slidefrombottom 2s forwards ease-in-out;
+}
+
+@keyframes slidefrombottom{
+    from{
+        transform: translateY(200%);
+        opacity: 0;
+    }
+    to{
+        transform: translateY(0%);
+        opacity: 1;
+    }
+}
+
+#alertmessages h6{
+    word-wrap: break-word;
+}
+#alertmessages{
+    position:fixed;
+    top: 0;
+    left: 0;
+    width:100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    z-index: 1000;
+}
+
+
+
+@media(max-width:600px){
+    .container{
+        width: 350px;
+    }
+    .container form h2{
+        font-size: 1.5em;
+    }
+}

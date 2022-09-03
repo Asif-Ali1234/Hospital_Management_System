@@ -1,0 +1,100 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'CSS/CP_styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/af3bc8c33b.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <title>Change Password</title>
+</head>
+<body>
+    {% for msg in messages %}
+					{%if msg is not null%}
+						<div class="alert {{msg.tags}} alert-dismissible fade show" id="alertmessages">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+								<h6>{{msg}}</h6>
+						</div>
+					{% endif %}
+				{% endfor %}
+    <div class="container">
+        <div class="row" id="pass">
+            <div class="col-sm" id="headingdiv">
+                <h1 id="heading">Change<br>Password</h1>
+            </div>
+            <div class="verticalseparator">
+
+            </div>
+            <div class="col-sm" id="inputdiv">
+                <form action="changepassword" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="hidden" name="change_requested_user" value={{name}}>
+                        <div id="usrmail">Username : <span id="username">{{name}}</span></div>
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <input type="password" class="pwd" name="npasswd" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z\d]).{8,}"title="Password Must Contain atleast one symbol,one numeric digit,one Uppercase letter , 
+                        one Lower case letter and must contain atleast 8 characters" id="passwd" onfocusout="checkfocus(this)" required />
+                        <label><span>Password</span></label>
+                        <i style=" position: absolute; " class="far fa-eye" id="eye" onclick="reveal(this)"></i>
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <input type="password" class="pwd" onfocusout="checkfocus(this)" name="cnfrmpasswd" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z\d]).{8,}"title="Password Must Contain atleast one symbol,one numeric digit,one Uppercase letter ,
+                     one Lower case letter and must contain atleast 8 characters" required />
+                        <label><span>Confirm Password</span></label>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-outline-secondary">Change Password</button>
+                    </div>
+                    <div class="form-group">
+                        <p id="errormessage"></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        window.setTimeout(function () {
+            $(".alert").fadeTo(500, 0).slideUp(500,
+                function () {
+                    $(this).remove();
+                });
+        }, 2000);
+        function checkfocus(id){
+            var ele=document.getElementById('errormessage')
+            if(!id.checkValidity()){
+                ele.innerHTML="Password must be in desired format Hover the input to see the format"
+                ele.style.color="red"
+                id.focus()
+                id.style.color="red"
+            }
+            else{
+                ele.innerHTML=""
+                id.style.color="darkgray"
+            }
+        }
+        bool=true
+        function reveal(x) {
+            x.classList.toggle("fa-eye-slash");
+            if (bool) {
+                document.getElementById('passwd').type = 'text';
+                document.getElementById('passwd').focus()
+                bool = false;
+            }
+            else {
+                document.getElementById('passwd').type = 'password';
+                document.getElementById('passwd').focus()
+                bool = true;
+            }
+        }
+    </script>
+</body>
+</html>

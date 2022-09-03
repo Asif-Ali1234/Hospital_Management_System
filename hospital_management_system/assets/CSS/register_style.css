@@ -1,0 +1,373 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel&display=swap');
+
+body{
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container .mainrow{
+    width: 900px;
+    height: 600px;
+    display: grid;
+    border-radius: 10px;
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+    grid-template-columns: 30% 69%;
+    grid-column-gap: 10px;
+    padding: 10px;
+}
+
+.container .mainrow .leftdiv,
+.container .mainrow .rightdiv{
+    border: 1px solid dodgerblue;
+    border-radius: 8px;
+    width: 100%;
+    padding: 10px;
+}
+
+.container .mainrow .leftdiv{
+    background-color: dodgerblue;
+    display: grid;
+    grid-template-rows: 80% 20%;
+    grid-row-gap: 0;
+    position: relative;
+}
+
+.container .mainrow .leftdiv .text{
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 20px;
+    color: white;
+    text-transform: uppercase;
+}
+
+.container .mainrow .leftdiv .loginhere{
+    background-color: white;
+    padding: 10px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: flex-start;
+    cursor: pointer;
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+}
+
+.loginhere p{
+    font-size: 1.3em;
+    font-weight: 500;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.container .mainrow .rightdiv{
+    padding: 10px;
+    display: grid;
+    grid-template-rows: 10% 80% 10%;
+    grid-template-columns: auto;
+    grid-row-gap: 10px;
+}
+
+.container .mainrow .rightdiv .logo{
+    height: 100%;
+    color: gray;
+    font-size: 2em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    font-family: 'Cinzel',serif;
+}
+
+.container .mainrow .rightdiv .registrationdiv{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.container .mainrow .rightdiv .registrationdiv .contentblock{
+    transition: all 0.5s;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    position: absolute;
+}
+
+.container .mainrow .rightdiv .registrationdiv .contentblock.inactive{
+    transform: scaleX(0);
+}
+
+.container .mainrow .rightdiv .registrationdiv .contentblock.active{
+    transform: scaleX(1);
+}
+
+.container .mainrow .rightdiv .registrationdiv .contentblock .nonanimated,
+.container .mainrow .rightdiv .registrationdiv .contentblock .animated{
+    width: 100%;
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.container .mainrow .rightdiv .registrationdiv .contentblock .inputsinrow{
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-column-gap: 10px;
+    margin: 0;
+    width: 100%;
+    padding: 0;
+}
+
+.container .mainrow .rightdiv .registrationdiv .contentblock .innerdiv{
+    margin: 0;
+    width: 100%;
+    margin-bottom: 10px;
+    transition: all 0.5s;
+    position: relative;
+}
+
+.label{
+    color: gray;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.container .rightdiv .registrationdiv .contentblock input{
+    width: 100%;
+    height: 40px;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid gray;
+    margin: 0;
+    color: rgba(0, 0, 0, 0.5);
+    letter-spacing: 1px;
+    font-size: 1.2em;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.container .rightdiv .registrationdiv .contentblock .errormessages{
+    color: red;
+    font-size: 1.1em;
+    margin: 10px 0px;
+    width: 100%;
+    word-wrap: break-word;
+}
+
+.container .rightdiv .registrationdiv .contentblock .animated .boxactive{
+    position: absolute;
+    transform: scale(1);
+    transition: all 0.5s;
+}
+
+.btnloader{
+    animation: spin 1s infinite ease-in-out;
+    font-size: 1.2em;
+}
+
+button:disabled{
+    cursor: not-allowed;
+}
+
+.dotspan{
+    font-size: 1.5em;
+    animation: scaleanim 1s infinite ease-in-out;
+}
+
+input:disabled{
+    cursor: not-allowed;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+@keyframes scaleanim{
+    from{
+        opacity: 1;
+    }
+    to{
+        opacity: 0;
+    }
+}
+
+@keyframes spin{
+    0%{
+        transform: rotate(0deg);
+    }
+    5%{
+        transform: rotate(15deg);
+    }
+    10%{
+        transform: rotate(30deg);
+    }
+    20%{
+        transform: rotate(45deg);
+    }
+    30%{
+        transform:rotate(60deg);
+    }
+    40%{
+        transform:rotate(75deg);
+    }
+    50%{
+        transform: rotate(90deg);
+    }
+    60%{
+        transform: rotate(135deg);
+    }
+    70%{
+        transform: rotate(180deg);
+    }
+    80%{
+        transform:rotate(225deg);
+    }
+    90%{
+        transform:rotate(270deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+
+}
+
+.container .rightdiv .registrationdiv .contentblock .animated .boxinactive{
+    position: absolute;
+    transform: scale(0);
+}
+
+/*.row input{
+    width: 100%;
+    margin: 0;
+    -moz-appearance: textfield;
+}
+
+.row input::-webkit-outer-spin-button,
+.row input::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+}*/
+
+.container .rightdiv .registrationdiv .contentblock .animated .innerdiv#genderdiv{
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.container .rightdiv .registrationdiv .contentblock .animated #genderdiv .inputsinrow div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid gray;
+    border-radius: 5px;
+    height: 30px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.container .rightdiv .registrationdiv .contentblock .animated #genderdiv .inputsinrow div:hover{
+    background: rgba(128, 128, 128,0.2);
+}
+
+.container .rightdiv .registrationdiv .contentblock .animated #genderdiv .inputsinrow div input,
+.container .rightdiv .registrationdiv .contentblock .animated #genderdiv .inputsinrow div label{
+    cursor: pointer;
+}
+
+.clearfix{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.container .rightdiv .registrationdiv .contentblock .innerdiv input + i{
+    color: gray;
+    position: absolute;
+    bottom: 12px;
+    right: 15px;
+    cursor: pointer;
+    font-size: 1.2em;
+}
+
+.container .rightdiv .bottomcircles{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.container .rightdiv .bottomcircles span{
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: 1px solid gray;
+    margin: 8px;
+    cursor: pointer;
+    padding: 1px;
+}
+
+.container .rightdiv .bottomcircles span.active{
+    background-color: gray;
+}
+
+@media (max-width:992px){
+    .container .mainrow{
+        width: 100%;
+        border: 1px solid blue;
+        grid-template-columns: auto;
+        grid-template-rows: 20% 80%;
+    }
+    .container .mainrow .rightdiv .logo{
+        font-size: 1em;
+    }
+    .container .mainrow .rightdiv .logo img{
+        width: 50px;
+        height: 50px;
+    }
+    .container .mainrow .leftdiv{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+        padding: 5px;
+    }
+
+    .container .mainrow .leftdiv .text{
+        margin: 0;
+    }
+
+    .container .mainrow .leftdiv .loginhere{
+        width: fit-content;
+        height: fit-content;
+        padding: 8px;
+        box-shadow: none;
+    }
+    .loginhere p{
+        margin: 0;
+        font-size: 1em;
+    }
+
+    .label{
+        font-size: 1em;
+    }
+
+    .container .mainrow .rightdiv .registrationdiv .contentblock#registrationblock{
+        height: 100%;
+        overflow: scroll;
+        padding: 10px;
+    }
+
+}

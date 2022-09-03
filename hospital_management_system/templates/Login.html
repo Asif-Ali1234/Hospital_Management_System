@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="{% static 'CSS/login_style.css' %}" />
+    <title>Login Into your account</title>
+</head>
+
+<body>
+    {% for msg in messages %}
+    {%if msg is not null%}
+    <div class="alert {{msg.tags}} alert-dismissible center-block fade show" id="alertmessages">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <h6>{{msg}}</h6>
+    </div>
+    {% endif %}
+    {% endfor %}
+    <div class="container">
+        <div class="mainrow">
+            <div class="leftdiv">
+                <div class="text">
+                    <h3>Welcome Back ,</h3>
+                    <p>Sign in to experience the Resumes</p>
+                </div>
+                <div class="loginhere">
+                    <p>Don't have an account ??</p>
+                    <a href="register" class="btn btn-outline-primary">Register Here</a>
+                </div>
+            </div>
+            <div class="rightdiv">
+                <div class="logo">
+                    <img src="{% static 'Images/logo3.jpg' %}"
+                        class="rounded" alt="logo" width="60px" height="60px" />
+                    <span class="title">Hospital Name</span>
+                </div>
+                <div class="registrationdiv">
+                    <form id="formsubmission" method="POST" action="login">
+                        {% csrf_token %}
+                        <div class="contentblock active" id="verificationblock">
+                            <div class="innerdiv">
+                                <span class="label">Username</span>
+                                <input type="email" placeholder="Enter your username" name="username" id="userid" required>
+                                <i class="fas fa-spinner" id="icon"></i>
+                                <span class="errormessages" id="username_errormessage"></span>
+                            </div>
+                            <div class="innerdiv">
+                                <span class="label">Password</span>
+                                <input type="password" placeholder="Enter your password" name="passwd" id="passwd"
+                                    required>
+                                <i class="fas fa-eye" onclick="reveal(this,'passwd')"></i>
+                                <span class="errormessages" id="password_errormessage"></span>
+                            </div>
+                            <div class="clearfix">
+                                <a href="forgotpassword" class="btn btn-outline-secondary float-left">Forgot Password</a>
+                                <button type="submit" class="btn btn-primary float-right" id="submitbtn"
+                                    title="To enable this pick an existing username" disabled>Login Securely</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://kit.fontawesome.com/af3bc8c33b.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="{% static 'JS/login_scripts.js' %}"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>

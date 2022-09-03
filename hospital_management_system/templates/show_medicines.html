@@ -1,0 +1,268 @@
+{% load static %}
+{% static "Images" as baseUrl %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+        integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{% static 'CSS/After_login_Styles.css' %}" />
+    <script type="text/javascript" src="{% static 'JS/After_login_Scripts.js' %}"></script>
+    <title>Medicines Dashboard</title>
+    <style>
+        .container-fluid{
+            flex-direction: column;
+        }
+        .submitbtn{
+            display: flex;
+            justify-content: flex-end;
+        }
+        .warningnote{
+            color:coral;
+            width:100%;
+            font-size:1.1em;
+        }
+
+        .table{
+            text-align: center;
+        }
+        .heading{
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .clearfix{
+            font-size: 18px;
+        }
+        #priceinput{
+            width:100%;
+            margin-top:10px;
+            padding:5px;
+            border-radius: 5px;
+            border:2px solid gray;
+            color:dimgray;
+            font-size:1.2em;
+            outline:none;
+        }
+        .error{
+            color:red;
+            font-size:1em;
+            word-wrap:break-word;
+        }
+        .footer{
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-end;
+            flex-direction: column;
+        }
+    </style>
+</head>
+
+<body>
+    {% for msg in messages %}
+						{%if msg is not null%}
+							<div class="alert {{msg.tags}} alert-dismissible fade show" id="alertmessages">
+								<button type="button" class="close" data-dismiss="alert">&times;</button>
+									<h6>{{msg}}</h6>
+							</div>
+						{% endif %}
+					{% endfor %}
+    <nav class="navbar navbar-expand-sm navbar-light" id="topnav">
+        <!-- Brand/logo -->
+        <a class="navbar-brand" href="#">
+            <img src="{% static 'Images/logo3.jpg' %}" />
+        </a>
+        <a class="navbar-brand" href="#">
+            <h1 class="header_text">{Hospital Name} Medicine Dashboard</h1>
+        </a>
+        <!-- Links -->
+        <ul class="nav justify-content-end navbar-nav navbar-collapse">
+            <li class="nav-item" id="usrnm">
+                <i class="fas fa-user-graduate"></i>
+                <span id="topname">{{user.first_name}}</span><br>
+                <span id="topmail">{{user}}</span>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    <i class="far fa-user-circle"></i>
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#" id="dropusrnm">
+                        <i class="far fa-id-card"></i>
+                        <span>{{user.first_name}}</span><br>
+                        <span id="usrmail">{{user}}</span>
+                    </a>
+                    <hr id="firsthr">
+                    <a class="dropdown-item" href="/Accounts/changepasswordafterlogin">
+                        <i class="fas fa-lock"></i>
+                        <span>Change Password</span>
+                    </a>
+                    <hr>
+                    <a class="dropdown-item" href="/Accounts/deleteaccount">
+                        <i class="fas fa-user-slash"></i>
+                        <span>Delete Account</span>
+                    </a>
+                    <hr>
+                    <a class="dropdown-item" href="/Accounts/logout">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Log Out</span>
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+    <div class="container-fluid">
+        <div class="clearfix">
+            <span class="float-left">
+                <span class="heading">Patient Name : </span> {{name}}
+            </span>
+            <span class="float-right">
+                <span class="heading">Age & Gender : </span> {{age}}{{gender}}
+            </span>
+        </div>
+        <br>
+        <div class="clearfix">
+            <span class="float-left">
+                <span class="heading">Email : </span> {{email}}
+            </span>
+            <span class="float-right">
+                <span class="heading">Contact number : </span> {{contact}}
+            </span>
+        </div>
+        <br>
+        <h2>Medicines List</h2>
+        <br>
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>Medicine name</th>
+                    <th>Medicine Quantity</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for medicine in medicines %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{medicine.medicine_name}}</td>
+                        <td>{{medicine.medicine_quantity}}</td>
+                        <td>
+                            {% if medicine.price == 0 %}
+                                <button class="btn btn-outline-danger addprice" data-toggle="modal" data-target="#priceModal">Add Price</button>
+                            {% else %}
+                                {{medicine.price}} <button class="btn btn-link addprice" data-toggle="modal" data-target="#priceModal">Update Price</button>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                <div class="modal fade" id="priceModal">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">Enter Price</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                <span class="warningnote">Please enter price in digits</span>
+                                <input type="number" id="priceinput" placeholder="Enter medicine price">
+                                <input type="hidden" id="hiddenusername" value={{email}}>
+                                <input type="hidden" id="hiddenmedicinename">
+                                <span class="error" id="priceerror"></span>
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="button" id="pricebtn" class="btn btn-secondary">Update Price</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="confirmpayment">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">Confirm Payment</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                <p class="heading">Email : {{email}}</p>
+                                <p class="heading">Name : {{name}}</p>
+                                <p class="heading">Total Price : {{total_price}}</p>
+                                <p class="warningnote">Confirmed payments cannot be undone , please collect cash</p>
+                            </div>
+                            <!-- Modal footer -->
+                            <div class="modal-footer clearfix">
+                                <button type="button" data-dismiss="modal" class="btn btn-danger float-left">Cancel</button>
+                                <a href= "/Services/complete_payment/{{email}}" class="btn btn-success float-right">Confirm Payment</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </tbody>
+        </table>
+        <div class="footer">
+            <span class="heading">
+                Total Price : {{total_price}}
+            </span>
+            <br>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#confirmpayment" >Complete Payment</button>
+            <br>
+            <span>
+                <span class="warningnote">Completing Payment mark payment as done and cannot be undone</span>   
+            </span>
+        </div>
+    </div>
+    <script>
+        var btns = document.querySelectorAll('.addprice')
+        btns.forEach(btn => {
+            btn.addEventListener('click',() => {
+                let parent = btn.parentElement.parentElement;
+                let mail = parent.firstElementChild.nextElementSibling.textContent
+                $('#hiddenmedicinename').val(mail)
+            })
+        })
+        $('#pricebtn').click(() => {
+            var data = $('#priceinput').val()
+            if(data == ""){
+                document.getElementById('priceerror').innerHTML = "Please enter price to add"
+            }
+            else{
+                var email = $('#hiddenusername').val()
+                var medname = $('#hiddenmedicinename').val()
+                $.ajax({
+                    type: 'GET',
+                    url: '/Services/update_price',
+                    data: {
+                        username: email,
+                        medname:medname,
+                        price:data,
+                    },
+                    success: function (data) {
+                       if(data['error']){
+                            document.getElementById('priceerror').innerHTML = data['msg']
+                       }
+                       else{
+                           window.location.reload()
+                       }
+                    },
+                    error: function (data) {
+                        alert("Error occured please try again")
+                    }
+                })
+            }
+        })
+    </script>
+</body>
+
+</html>

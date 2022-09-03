@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fondamento:ital@1&display=swap');
+
+body{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #cccccc;
+}
+
+.container{
+    width: 450px;
+    height: 300px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    box-shadow: 0 16px 32px rgba(0,0,0,0.2);
+    background-color: white;
+    animation: slidefromtop 1s forwards ease-in-out;
+    opacity: 0;
+    transition: all 0.5s;
+    overflow: hidden;
+    z-index: 1;
+}
+
+@keyframes slidefromtop{
+    from{
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to{
+        transform: translateY(0%);
+        opacity: 1;
+    }
+}
+
+.container form .form-group{
+    position: relative;
+    margin-bottom: 30px;
+    width: 100%;
+    text-align: center;
+}
+.container form .form-group p{
+    width: 100%;
+    background-color: #e6e6e6;
+    border-radius: 10px;
+    padding: 5px;
+    color: cadetblue;
+    font-weight: 600;
+    font-size: 1.5em;
+    font-family: 'Fondamento', cursive;
+    animation: slidefromright 1s forwards ease-in-out;
+    transition: all 0.5s;
+    opacity: 0;
+    animation-delay: 0.3s;
+}
+
+@keyframes slidefromright{
+    from{
+        transform: translateX(500%);
+        opacity: 0;
+    }
+    to{
+        transform: translateX(0%);
+        opacity: 1;
+    }
+}
+
+#alertmessages h6{
+    word-wrap: break-word;
+}
+#alertmessages{
+    position:fixed;
+    top: 0;
+    left: 0;
+    width:100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    z-index: 1000;
+}
+
+.container form .form-group button{
+    transition: all 0.5s;
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+    animation: slidefromleft 1s forwards ease-in-out;
+    opacity: 0;
+    animation-delay: 0.6s;
+}
+@keyframes slidefromleft{
+    from{
+        transform: translateX(-500%);
+        opacity: 0;
+    }
+    to{
+        transform: translateX(0%);
+        opacity: 1;
+    }
+}
+
+
+.modal .warningmsg{
+    text-align: center;
+    font-size: 1.4em;
+    font-family: 'Rajdhani',serif;
+}
+
+button{
+    font-family: 'Cinzel', serif;
+    font-size: 1.2em !important;
+    font-weight: bolder !important;
+    letter-spacing: 1px;
+}
+
+.modal form .form-group{
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.modal form .form-group input{
+    width: 100%;
+    border: 2px solid dimgray;
+    border-radius: 10px;
+    padding: 10px;
+    height: 50px;
+    font-size: 1.2em;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: gray;
+    outline:none;
+    transition: all 0.5s;
+}
+
+.modal form .form-group span{
+    position: absolute;
+    left: 10px;
+    bottom: 11px;
+    font-size: 1.2em;
+    font-weight: 600;
+    color: dimgray;
+    letter-spacing: 1px;
+    font-family: 'Cinzel',serif;
+    background-color: white;
+    transition: all 0.5s;
+}
+
+
+.modal form .form-group i{
+    position: absolute;
+    left: 94%;
+    bottom: 15px;
+    font-size: 20px;
+    color: dimgray;
+}
+
+.modal form .form-group input:focus ~ span,
+.modal form .form-group input:valid ~ span{
+    transform: translateY(-26px);
+    color: dodgerblue;
+    font-size: 1em;
+    font-weight: 900;
+}
+.modal form .form-group input:focus,
+.modal form .form-group input:valid{
+    border: 2px solid dodgerblue;
+    color: dimgray;
+}
