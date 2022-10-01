@@ -18,7 +18,7 @@ At last after completion patient can be able to see his/her bills in the bills s
 
 Coming to architecture it describes the steps we need to complete in the project and we have used Coggle to draw the architectures and also other images.
 
-<img src="https://drive.google.com/uc?export=view&id=1fDwzsYLb08Tgczwn-kjTBwIgdXddF9W_" style="width:100px;height:100px;"/>
+<img src="https://drive.google.com/uc?export=view&id=1fDwzsYLb08Tgczwn-kjTBwIgdXddF9W_" style="width:500px;height:400px;"/>
  
 Fig : *Architecture of system*
 
@@ -27,37 +27,24 @@ They will be secured using a login ID and password which should be kept secretly
 Third one is medicine login, which is associated with the medicine staff and it will also be created by super admin. At last super admin login which will be create at the time of development.
 All these logins are secured by unique login ID’s and passwords and no one cannot access others logins. Coming to next module, services which is used to manage services provided to user like op, bills and medicines. All these will be managed in this module.
 
-<!-- ## Database Map
+## Database Map
 
-<img src="https://drive.google.com/uc?export=view&id=1Ce_CfcDOCEvbJAWzmznFVPl4hnqhRIV6"/>
+<img src="https://drive.google.com/uc?export=view&id=1Ce_CfcDOCEvbJAWzmznFVPl4hnqhRIV6" style="width:500px;height:400px;"/>
 
 ## UI Screen Shots
 
-UI screenshots             |  UI Screenshots
-:-------------------------:|:-------------------------:
-![image](https://drive.google.com/uc?export=view&id=1z5PVy0ubxMVFSy-jch5nlOTsJ4cEGigV)  |  ![image](https://drive.google.com/uc?export=view&id=1ufrVNdzxB1bMD91_XCZ0Ko92Qi2sNxrB)
+### Registration and Login
 
-### User Registration
+<img src="https://drive.google.com/uc?export=view&id=1z5PVy0ubxMVFSy-jch5nlOTsJ4cEGigV" style="width:400px;height:300px;"/> <img src="https://drive.google.com/uc?export=view&id=1ufrVNdzxB1bMD91_XCZ0Ko92Qi2sNxrB" style="width:400px;height:300px;" />
 
-<img src="https://drive.google.com/uc?export=view&id=1z5PVy0ubxMVFSy-jch5nlOTsJ4cEGigV"/>
+### Patient Dashboard Services
 
-### User Registration
+<img src="https://drive.google.com/uc?export=view&id=1Rj6L_5veR6HEJwyZAGhAgjBX6q05w3J5" style="width:400px;height:300px;"/> <img src="https://drive.google.com/uc?export=view&id=1mjyDFo-62yH86PF9Baz3chxmQbVS5YTQ" style="width:50%;height:300px;"/> <img src="https://drive.google.com/uc?export=view&id=1G3GIWNNv5h01q-_gfoUH04ZBtKTfslVE" style="width:500px;height:300px;"/> <img src="https://drive.google.com/uc?export=view&id=1G1gf6zJJOZ8OkZ8GuAezhBVFkDs2ftZu" style="width:500px;height:300px;"/>
 
-<img src="https://drive.google.com/uc?export=view&id=1z5PVy0ubxMVFSy-jch5nlOTsJ4cEGigV"/>
+### Hospital Staff Dashboard
 
-### User Registration
+<img src="https://drive.google.com/uc?export=view&id=1YdvrL7f4MeHog5C5lPoP3gHlz_2kGLl7" style="width:500px;height:100%;"/>
 
-<img src="https://drive.google.com/uc?export=view&id=1z5PVy0ubxMVFSy-jch5nlOTsJ4cEGigV"/>
+### Medicine Dashboard and Payments
 
-### User Registration
-
-<img src="https://drive.google.com/uc?export=view&id=1z5PVy0ubxMVFSy-jch5nlOTsJ4cEGigV"/>
-
-### User Registration
-
-<img src="https://drive.google.com/uc?export=view&id=1z5PVy0ubxMVFSy-jch5nlOTsJ4cEGigV"/>
-
-### User Registration
-
-<img src="https://drive.google.com/uc?export=view&id=1z5PVy0ubxMVFSy-jch5nlOTsJ4cEGigV"/>-->
-
+<img src="https://drive.google.com/uc?export=view&id=1JPguhpRDM6j0UlScjduRsOG_Pr0Guv5F" style="width:500px;height:100%;"/> <img src="https://drive.google.com/uc?export=view&id=1qZvrHujYETdYlRRTh5kqk1vrFAhUNZV1" style="width:500px;height:100%;"/>
