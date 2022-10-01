@@ -18,7 +18,7 @@ At last after completion patient can be able to see his/her bills in the bills s
 
 Coming to architecture it describes the steps we need to complete in the project and we have used Coggle to draw the architectures and also other images.
 
-<img src="https://drive.google.com/uc?export=view&id=1fDwzsYLb08Tgczwn-kjTBwIgdXddF9W_"/>
+<img src="https://drive.google.com/uc?export=view&id=1fDwzsYLb08Tgczwn-kjTBwIgdXddF9W_" style="width:100px;height:100px;"/>
  
 Fig : *Architecture of system*
 
